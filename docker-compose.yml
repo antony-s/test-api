@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+    mongodb:
+        image: mongo
+
+    db-fixtures:
+        build: ./fixtures
+        depends_on:
+            - mongodb
+
+    app:
+        build: ./app
+        volumes:
+            - ./app:/app
+        ports:
+            - 5000:5000
+        depends_on:
+            - mongodb
